@@ -1,21 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  phone: MyString
-  birthdate: 2015-06-11 11:50:38
-  img_url: MyString
-  parent: false
-  family_id: 
-
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  phone: MyString
-  birthdate: 2015-06-11 11:50:38
-  img_url: MyString
-  parent: false
-  family_id: 
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value
