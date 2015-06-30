@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
 
   get 'home/index'
-
   root 'home#index'
 
 end
