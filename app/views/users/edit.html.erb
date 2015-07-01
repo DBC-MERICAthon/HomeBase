@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+  <%= f.label :first_name %>:
+  <%= f.text_field :first_name %><br />
+
+  <%= f.label :last_name %>:
+  <%= f.text_field :last_name %><br />
+
+  <%= f.label :nickname %>:
+  <%= f.text_field :nickname %><br />
+
+  <%= f.label :email %>:
+  <%= f.email_field :email %><br />
+
+  <%= f.label :phone %>:
+  <%= f.telephone_field :phone %><br />
+
+  <%= f.label :birthdate %>:
+  <%= f.datetime_field :birthdate %><br />
+
+  <%= f.label :image_url %>:
+  <%= f.url_field :image_url %><br />
+
+
+  <%= f.submit %>
+<% end %>

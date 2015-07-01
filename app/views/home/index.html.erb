@@ -1,1 +1,4 @@
-<p>Hello World</p>
+<% if current_user %>
+Welcome to HomeBase, <%= current_user.name %>
+<%= link_to 'Go to My Page', 'users/"#{@user.id}"' %>
+<% end %>
