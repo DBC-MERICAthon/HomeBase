@@ -6,10 +6,10 @@ var chat = (function(){
   };
   // Makes divs for the individual chat lines
   var chatLine = function(args){
-    return $('<div>'+args.name+': '+args.text+'</div>')
+    return $('<li class="collection-item"><span class="name">'+args.name+': </span><span class="text">'+args.text+'</span></li>')
   };
   // Initialize parts of chat area
-  var chatBox = $("<div id='chatBox'></div>");
+  var chatBox = $("<ul style='height: 400px; overflow-y: scroll;' id='chatBox' class='collection'></ul>");
   var input = $("<input type='text' placeholder='Chat!'>");
   var submit = $("<input type='submit' value='Submit'>");
   // Makes AJAX call and sets event listeners
@@ -25,7 +25,7 @@ var chat = (function(){
       fb.on('value', function(snap){
         chatBox.html('');
         $.each(snap.val(),function(time,line){
-          chatBox.append(chatLine(line))
+          chatBox.prepend(chatLine(line))
         });
       });
       // Listens for clicks on the submit button
@@ -113,4 +113,22 @@ var map = (function(){
 $(function(){
   chat.init("#chat");
   map.init("map-canvas");
+  $('#lights-on').on('click', function(){
+    console.log('on')
+    var data = { bulb_name: $(this).attr('name'), state: 'true' };
+    $.ajax({
+      url: '/lightbulbs/update',
+      type: 'PUT',
+      data: data
+    })
+  })
+  $('#lights-off').on('click', function(){
+    console.log('off')
+    var data = { bulb_name: $(this).attr('name'), state: 'false' };
+    $.ajax({
+      url: '/lightbulbs/update',
+      type: 'PUT',
+      data: data,
+    })
+  })
 });

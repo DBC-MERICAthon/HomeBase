@@ -1,36 +1,12 @@
 
 <% if current_user.id == @user.id %>
 
-  First Name: <%= @user.first_name %><br>
-  Last Name: <%= @user.last_name %><br>
-  Nickname: <%= @user.nickname %><br>
-  Email: <%= @user.email %><br>
-  Phone: <%= @user.phone %><br>
-  Birthdate: <%= @user.birthdate %><br>
-  Photo: <img src="<%= @user.image_url %>"/> <br>
-  <%= link_to "Edit Your Info!", edit_user_path %>
-  <a href="/users/<%= @user.id %>/families/<%= @user.family_id %>">Family Page</a>
-
-  <br>
-  <br>
-
-  <p>Turn lights on and off!</p>
-
-  <% @user.lightbulbs.each do |lightbulb| %>
-    <p>Lightbulb Name: <%= lightbulb.bulb_name.upcase %> </p>
-
-    <%= form_for lightbulb do |f| %>
-      <%= f.hidden_field :bulb_name %>
-      <%= f.hidden_field :state, :value => true %>
-      <%= f.submit "Turn On" %>
-    <% end %>
-
-    <%= form_for lightbulb do |f| %>
-      <%= f.hidden_field :bulb_name %>
-      <%= f.hidden_field :state, :value => false %>
-      <%= f.submit "Turn Off"%>
-    <% end %>
-
-  <% end %>
+  <div><img src="<%= @user.image_url %>"/></div>
+  <div>First Name: <%= @user.first_name %></div>
+  <div>Last Name: <%= @user.last_name %></div>
+  <div>Nickname: <%= @user.nickname %></div>
+  <div>Email: <%= @user.email %></div>
+  <div>Phone: <%= @user.phone %></div>
+  <div>Birthdate: <%= @user.birthdate %></div>
 
 <% end %>

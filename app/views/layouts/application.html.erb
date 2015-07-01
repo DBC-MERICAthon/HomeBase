@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Homebase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <script src='https://cdn.firebase.com/js/client/2.1.0/firebase.js'></script>
@@ -11,30 +12,27 @@
 </head>
 <body>
    <div>
-    <ul class="nav nav-pills">
-      <li role="presentation">
-        <%= link_to "Home", root_path %>
-      </li>
-      <% if current_user %>
-      <li role="presentation">
-         <!-- # Signed in as <%= current_user.name %> ! -->
-      </li>
+    <nav>
+      <div class="nav-wrapper blue-grey">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <%= %>
+          <li><%= link_to "Home", root_path %></li>
+          <% if current_user %>
+            <li><a href="/users/<%= current_user.id %>/families/<%= current_user.family_id %>">Family Page</a></li>
 
-      <li role="presentation">
-      </li>
-    </ul>
-      <% else %>
-
-      <div class="logo"></div>
-
-      <div class="sign-in-with-google">
-        <button type="button" class="btn btn-default btn-lg active">
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-        </button>
+            <li><a href="/users/<%= current_user.id %>"><%= "My Profile" %></a></li>
+            <li><%= link_to "Edit Profile", edit_user_path %></li>
+            <li><a href="/signout">Signout</a></li>
+          <% else %>
+            <li><%= link_to "Signin with Google", "/auth/google_oauth2", id: "sign_in" %></li>
+          <% end %>
+        </ul>
       </div>
-      <% end %>
+    </nav>
+
   </div>
-<div>
+<div class="container">
   <%= yield %>
 </div>
 

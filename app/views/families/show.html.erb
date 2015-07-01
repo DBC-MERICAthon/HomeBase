@@ -1,4 +1,15 @@
-<div class="regular_ass">
-  <div id="chat"></div>
-  <div id="map-canvas" style='height: 300px; width=: 100%;'></div>
+<div class="row">
+  <div class='col s8' id="map-canvas" style='height: 500px; width=: 100% ;'></div>
+  <div class='col s4' id="chat"></div>
+</div>
+<div class='row'>
+  <ul class='collection'>
+    <% current_user.lightbulbs.each do |lightbulb| %>
+      <li class='collection-item row valign-wrapper'>
+        <span class='col s8 valign'>Lightbulb Name: <%= lightbulb.bulb_name.upcase %> </span>
+        <a class="waves-effect waves-light btn col s2" id='lights-on' name='<%= lightbulb.bulb_name %>'>Lights On</a>
+        <a class="waves-effect waves-light btn col s2" id='lights-off' name='<%= lightbulb.bulb_name %>'>Lights Off</a>
+      </li>
+    <% end %>
+  </ul>
 </div>
