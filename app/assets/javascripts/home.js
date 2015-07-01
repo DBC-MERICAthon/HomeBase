@@ -1,3 +1,4 @@
+// chat.init('#chat-div')
 var chat = (function(){
   // Returns timestamp in milliseconds
   var timeNow = function(){
@@ -19,7 +20,7 @@ var chat = (function(){
     $.get('/user_data').done(function(user){
       var families = "https://dazzling-fire-1448.firebaseio.com/families/"
       // Firebase client
-      var fb = new Firebase(families+user.uid);
+      var fb = new Firebase(families+user.uid+"/chat");
       // Listens for DB changes and refreshes the chat canvas
       fb.on('value', function(snap){
         chatBox.html('');
@@ -42,20 +43,69 @@ var chat = (function(){
   };
 })();
 
-var m = (function(){
+// map.init('map-canvas')
+var map = (function(){
+  // Runs the calls to FB and sets markers
+  var setMarkers = function(map,coords) {
+    // AJAX to get user data
+    $.get('/user_data').done(function(user){
+      var family = "https://dazzling-fire-1448.firebaseio.com/families/"\
+      // Set FB ref
+      var ref = new Firebase(family+user.uid+"/locations");
+      ref.child(user.name).set(coords);
+      // Save markers for deletion
+      var markers = [];
+      // Listen for db changes and set markers
+      ref.on('value', function(snap){
+        // Delete all current markers
+        for(var i = 0; i < markers.length; i++){
+          markers[i].setMap(null)
+        };
+        markers = [];
+        // Iterate through all family locations
+        $.each(snap.val(),function(name,latlng){
+          // Create marker
+          var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: name
+          });
+          // Add to markers array
+          markers.push(marker)
+          // Init info window
+          var infowindow = new google.maps.InfoWindow({
+            content: '<div>'+name+'</div>'
+          });
+          // Add info window to marker
+          google.maps.event.addListener(marker, 'click', function(){
+            infowindow.open(map,marker);
+          });
+        });
+      });
+    });
+  };
   var init = function(target){
-    var mapOptions = {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 13
-    };
-    var map = new google.maps.Map(document.getElementById(target), mapOptions);
-    return map
+    // Start cascade with getting location from client's browser
+    navigator.geolocation.getCurrentPosition(function(position){
+      // Save coords
+      var coords = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      // Save mapOptions
+      var mapOptions = {
+        center: coords,
+        zoom: 13
+      };
+      // Initialize map
+      var map = new google.maps.Map(document.getElementById(target), mapOptions);
+      // When map is loaded, make DB query and add markers
+      google.maps.event.addListener(map,'tilesloaded', function(){
+        setMarkers(map,coords);
+      });
+    });
   };
   return {
     init: init
   };
 })();
-
-$(function() {
-  var map = m.init('map-canvas');
-});

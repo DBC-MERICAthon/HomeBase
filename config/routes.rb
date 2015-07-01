@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'user_data', to: 'home#user_data', as: 'user_data'
-  get 'map', to: 'home#map', as: 'map'
 
   resources :sessions, only: [:create, :destroy]
 
