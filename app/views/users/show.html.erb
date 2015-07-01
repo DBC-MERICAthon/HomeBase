@@ -1,4 +1,3 @@
-I'm the show page!
 
 <% if current_user.id == @user.id %>
 
@@ -10,6 +9,7 @@ I'm the show page!
   Birthdate: <%= @user.birthdate %><br>
   Photo: <img src="<%= @user.image_url %>"/> <br>
   <%= link_to "Edit Your Info!", edit_user_path %>
+  <a href="/users/<%= @user.id %>/families/<%= @user.family_id %>">Family Page</a>
 
   <br>
   <br>

@@ -11,13 +11,29 @@
 </head>
 <body>
    <div>
+    <ul class="nav nav-pills">
+      <li role="presentation">
+        <%= link_to "Home", root_path %>
+      </li>
       <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <li role="presentation">
+         <!-- # Signed in as <%= current_user.name %> ! -->
+      </li>
+
+      <li role="presentation">
+      </li>
+    </ul>
       <% else %>
+
+      <div class="logo"></div>
+
+      <div class="sign-in-with-google">
+        <button type="button" class="btn btn-default btn-lg active">
         <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+        </button>
+      </div>
       <% end %>
-    </div>
+  </div>
 <div>
   <%= yield %>
 </div>

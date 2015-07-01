@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701004656) do
+ActiveRecord::Schema.define(version: 20150701204604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "families", force: :cascade do |t|
+    t.string   "name"
+    t.string   "home_address"
+    t.float    "lat"
+    t.float    "lng"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "lightbulbs", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "family_id"
     t.string   "ip_address"
     t.string   "bulb_name"
     t.integer  "bulb_number"
@@ -42,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150701004656) do
     t.float    "lng"
     t.boolean  "parent"
     t.string   "image_url"
+    t.integer  "family_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

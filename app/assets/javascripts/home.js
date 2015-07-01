@@ -20,7 +20,7 @@ var chat = (function(){
     $.get('/user_data').done(function(user){
       var families = "https://dazzling-fire-1448.firebaseio.com/families/"
       // Firebase client
-      var fb = new Firebase(families+user.uid+"/chat");
+      var fb = new Firebase(families+user.family_id+"/chat");
       // Listens for DB changes and refreshes the chat canvas
       fb.on('value', function(snap){
         chatBox.html('');
@@ -49,9 +49,9 @@ var map = (function(){
   var setMarkers = function(map,coords) {
     // AJAX to get user data
     $.get('/user_data').done(function(user){
-      var family = "https://dazzling-fire-1448.firebaseio.com/families/"\
+      var family = "https://dazzling-fire-1448.firebaseio.com/families/"
       // Set FB ref
-      var ref = new Firebase(family+user.uid+"/locations");
+      var ref = new Firebase(family+user.family_id+"/locations");
       ref.child(user.name).set(coords);
       // Save markers for deletion
       var markers = [];
@@ -109,3 +109,8 @@ var map = (function(){
     init: init
   };
 })();
+
+$(function(){
+  chat.init("#chat");
+  map.init("map-canvas");
+});

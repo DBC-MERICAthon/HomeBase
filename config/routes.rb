@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'user_data', to: 'home#user_data', as: 'user_data'
 
   resources :sessions, only: [:create, :destroy]
-  resources :users
+  resources :users do
+    resources :families
+  end
   resources :lightbulbs
 
 

@@ -1,4 +1,6 @@
 class Lightbulb < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :family
   def self.lights_on(bulb_number)
     bulb = Huey::Bulb.find(bulb_number)
     p "*" * 100

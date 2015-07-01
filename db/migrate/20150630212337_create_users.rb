@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.float :lng
       t.boolean :parent
       t.string :image_url
+      t.integer :family_id
 
       t.timestamps null: false
     end

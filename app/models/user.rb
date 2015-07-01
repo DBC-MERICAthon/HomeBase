@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :lightbulbs
+  belongs_to :family
 
   def self.from_omniauth(auth)
     where({uid: auth.uid}).first_or_initialize.tap do |user|
