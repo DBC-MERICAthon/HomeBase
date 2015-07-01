@@ -1,4 +1,10 @@
-<% if current_user %>
-Welcome to HomeBase, <%= current_user.name %>
-<%= link_to 'Go to My Page', "users/#{current_user.id}" %>
+<% if !current_user %>
+  <div class='continer'>
+    <div style='width:100%; text-align:center;'>
+      <img src="http://i.imgur.com/xCkwbWJ.png">
+      <a href="/auth/google_oauth2">
+        <img src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png">
+      </a>
+    </div>
+  </div>
 <% end %>

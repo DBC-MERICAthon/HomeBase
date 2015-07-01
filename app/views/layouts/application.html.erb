@@ -12,24 +12,21 @@
 </head>
 <body>
    <div>
-    <nav>
-      <div class="nav-wrapper blue-grey">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <%= %>
-          <li><%= link_to "Home", root_path %></li>
-          <% if current_user %>
-            <li><a href="/users/<%= current_user.id %>/families/<%= current_user.family_id %>">Family Page</a></li>
-
-            <li><a href="/users/<%= current_user.id %>"><%= "My Profile" %></a></li>
-            <li><%= link_to "Edit Profile", edit_user_path %></li>
-            <li><a href="/signout">Signout</a></li>
-          <% else %>
-            <li><%= link_to "Signin with Google", "/auth/google_oauth2", id: "sign_in" %></li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
+    <% if current_user %>
+      <nav>
+        <div class="nav-wrapper blue-grey">
+            <a href="#" class="brand-logo" style='width: 2.5em; height: 1.7em;'>
+              <img class='responsive-img' src="http://i.imgur.com/xCkwbWJ.png">
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/users/<%= current_user.id %>/families/<%= current_user.family_id %>">Family Page</a></li>
+                <li><a href="/users/<%= current_user.id %>"><%= "My Profile" %></a></li>
+                <li><%= link_to "Edit Profile", edit_user_path %></li>
+                <li><a href="/signout">Signout</a></li>
+            </ul>
+          </div>
+      </nav>
+    <% end %>
 
   </div>
 <div class="container">
