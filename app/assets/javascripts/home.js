@@ -42,6 +42,20 @@ var chat = (function(){
   };
 })();
 
+var m = (function(){
+  var init = function(target){
+    var mapOptions = {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 13
+    };
+    var map = new google.maps.Map(document.getElementById(target), mapOptions);
+    return map
+  };
+  return {
+    init: init
+  };
+})();
+
 $(function() {
-  chat.init('#chatWrapper')
+  var map = m.init('map-canvas');
 });
