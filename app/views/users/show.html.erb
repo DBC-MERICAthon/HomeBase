@@ -11,7 +11,26 @@ I'm the show page!
   Photo: <img src="<%= @user.image_url %>"/> <br>
   <%= link_to "Edit Your Info!", edit_user_path %>
 
-<% end %>
+  <br>
+  <br>
 
-<a href="/users/<%=@user.id%>/lights_on">Turn Lights On</a>
-<a href="/users/<%=@user.id%>/lights_off">Turn Lights Off</a>
+  <p>Turn lights on and off!</p>
+
+  <% @user.lightbulbs.each do |lightbulb| %>
+    <p>Lightbulb Name: <%= lightbulb.bulb_name.upcase %> </p>
+
+    <%= form_for lightbulb do |f| %>
+      <%= f.hidden_field :bulb_name %>
+      <%= f.hidden_field :state, :value => true %>
+      <%= f.submit "Turn On" %>
+    <% end %>
+
+    <%= form_for lightbulb do |f| %>
+      <%= f.hidden_field :bulb_name %>
+      <%= f.hidden_field :state, :value => false %>
+      <%= f.submit "Turn Off"%>
+    <% end %>
+
+  <% end %>
+
+<% end %>

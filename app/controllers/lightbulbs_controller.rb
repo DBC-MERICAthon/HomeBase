@@ -1,9 +1,20 @@
 class LightbulbsController < ApplicationController
-  def lights_on
-    redirect_to 'users/"#{current_user.id}"'
+
+  def update
+    find_lightbulb = current_user.lightbulbs.find_by(params[:bulb_name])
+    p "* " * 100
+    p params[:lightbulb][:state]
+    p "* " * 100
+    p params[:lightbulb][:state]
+    if params[:lightbulb][:state] == "true"
+      Lightbulb.lights_on(find_lightbulb.bulb_number)
+      p "9" * 100
+
+    else
+      Lightbulb.lights_off(find_lightbulb.bulb_number)
+      p "k" * 100
+    end
+    redirect_to user_path
   end
 
-  def lights_off
-    redirect_to 'users/"#{current_user.id}"'
-  end
 end

@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :sessions, only: [:create, :destroy]
-  resources :users do
-    get '/lights_on' => 'lightbulbs#lights_on', :as => 'lights_on'
-    get '/lights_off' => 'lightbulbs#lights_off', :as => 'lights_off'
-  end
+  resources :users
+  resources :lightbulbs
+
 
   get 'home/index'
   root 'home#index'
